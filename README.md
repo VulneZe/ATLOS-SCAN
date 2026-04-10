@@ -39,26 +39,43 @@ pip3 install scapy rich requests ldap3
 sudo apt update
 sudo apt install nmap dnsutils snmp -y
 
-Utilisation
+```
+
+## Utilisation
+```bash
 1. Scan complet (mode recommandé)
 Bashsudo python3 atlos.py --mode recon
+```
+
 2. ARP Poisoning MITM
+```bash
 Bashsudo python3 atlos.py --mode mitm -t 192.168.1.50 -g 192.168.1.1 -i eth0
+```
+
 3. LDAP Enumeration
+```bash
 Bash# Anonyme
 sudo python3 atlos.py --mode ldap -t 192.168.1.10
-
+```
 # Avec credentials
-sudo python3 atlos.py --mode ldap -t 192.168.1.10 -d company.local -u pentest -p Password123
-4. Mode complet (recon + tout)
-Bashsudo python3 atlos.py --mode full
 
+```bash
+sudo python3 atlos.py --mode ldap -t 192.168.1.10 -d company.local -u pentest -p Password123
+```
+
+
+4. Mode complet (recon + tout)
+```bash
+Bashsudo python3 atlos.py --mode full
+```
 Options disponibles
 
 
-
-
 OptionDescription--mode reconScan reconnaissance complet--mode mitmARP Poisoning MITM--mode ldapLDAP Enumeration--mode fullMode complet-i, --interfaceInterface réseau (ex: eth0, wlan0)-t, --targetIP cible (MITM ou DC LDAP)-g, --gatewayIP de la gateway (pour MITM)-d, --domainDomaine Active Directory-u, --userNom d’utilisateur LDAP-p, --passwordMot de passe LDAP
+
+
+
+
 
 Rapport
 À la fin du scan, un fichier ATLOS_RedTeam_Report.html est généré automatiquement dans le dossier.
