@@ -1,8 +1,7 @@
 # ATLOS v5.0 - Advanced Threat Landscape Observation System
 
 **Version :** 5.0 - Enterprise Red Team Edition  
-**Auteur :** Baptiste Rouault  
-**Site :** [atlos.fr](https://atlos.fr)  
+**Auteur :** Atlos
 **License :** MIT License  
 
 ATLOS v5.0 est une refonte complète de l'outil de pentest réseau, avec une architecture modulaire, des fonctionnalités avancées et une sécurité renforcée.
@@ -48,7 +47,7 @@ sudo apt update && sudo apt install -y nmap dnsutils snmp
 ### Installation des dépendances
 ```bash
 # Clone du projet
-git clone https://github.com/baptiste-rouault/atlos.git
+git clone https://github.com/VulneZe/atlos.git
 cd atlos/atlos_v5
 
 # Installation Python
