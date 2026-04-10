@@ -1,0 +1,223 @@
+# ATLOS v5.0 - Configuration Centralisée
+# Fichier de configuration principal
+
+# ===================== SCAN CONFIGURATION =====================
+scan:
+  # Timeout général pour les requêtes réseau (secondes)
+  timeout: 30
+  
+  # Nombre de threads concurrents pour les scans
+  max_threads: 50
+  
+  # Mode furtif (réduit la détection par IDS/IPS)
+  stealth_mode: false
+  
+  # Délai aléatoire entre les scans (evade pattern detection)
+  random_delay: true
+  
+  # Délai minimum/maximum entre scans (secondes)
+  delay_range: [0.1, 2.0]
+  
+  # Ports à scanner par défaut
+  default_ports: "1-1000,3389,5985,8080,8443"
+  
+  # Exclusion d'hosts spécifiques
+  exclude_hosts: []
+  
+  # Tentatives de retry pour les scans échoués
+  retry_attempts: 3
+
+# ===================== SÉCURITÉ =====================
+security:
+  # Chiffrement des credentials dans la base de données
+  encrypt_credentials: true
+  
+  # Clé de chiffrement (générée automatiquement si vide)
+  encryption_key: null
+  
+  # Activation des logs d'audit
+  audit_log: true
+  
+  # Timeout de session (secondes)
+  session_timeout: 3600
+  
+  # Nettoyage automatique des logs (jours)
+  log_retention: 30
+  
+  # Validation stricte des entrées
+  strict_input_validation: true
+
+# ===================== MODULES =====================
+modules:
+  # Modules activés par défaut
+  enabled:
+    - arp_scan
+    - port_scan
+    - service_detection
+    - smb_enumeration
+    - dns_enumeration
+    - http_enumeration
+    - ldap_enumeration
+    - vulnerability_scan
+  
+  # Modules optionnels
+  optional:
+    - mitm_attacks
+    - wifi_scanning
+    - cloud_enumeration
+    - container_security
+  
+  # Configuration spécifique aux modules
+  smb:
+    timeout: 10
+    max_shares: 10
+    anonymous_only: true
+  
+  ldap:
+    timeout: 15
+    max_entries: 1000
+    follow_referrals: false
+  
+  http:
+    timeout: 8
+    max_redirects: 5
+    user_agent: "ATLOS/5.0 Security Scanner"
+    verify_ssl: false
+
+# ===================== BASE DE DONNÉES =====================
+database:
+  # Type de base de données (sqlite/postgresql/mysql)
+  type: "sqlite"
+  
+  # Chemin pour SQLite
+  sqlite_path: "data/atlos.db"
+  
+  # Configuration pour PostgreSQL/MySQL
+  host: "localhost"
+  port: 5432
+  name: "atlos"
+  user: "atlos_user"
+  password: null
+  
+  # Pool de connexions
+  pool_size: 10
+  max_overflow: 20
+
+# ===================== API REST =====================
+api:
+  # Activation de l'API REST
+  enabled: true
+  
+  # Port d'écoute
+  port: 8080
+  
+  # Host d'écoute (0.0.0.0 pour toutes les interfaces)
+  host: "127.0.0.1"
+  
+  # Clé API pour l'authentification
+  api_key: null
+  
+  # CORS settings
+  cors_origins: ["http://localhost:3000"]
+  
+  # Rate limiting (requêtes/minute)
+  rate_limit: 100
+
+# ===================== REPORTING =====================
+reporting:
+  # Formats de rapport supportés
+  formats: ["html", "pdf", "json", "csv"]
+  
+  # Template par défaut
+  default_template: "professional"
+  
+  # Inclusion des screenshots
+  include_screenshots: true
+  
+  # Génération automatique après scan
+  auto_generate: true
+  
+  # Export des données brutes
+  export_raw_data: true
+
+# ===================== LOGGING =====================
+logging:
+  # Niveau de log (DEBUG/INFO/WARNING/ERROR/CRITICAL)
+  level: "INFO"
+  
+  # Format des logs
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # Fichiers de log
+  file_handler:
+    enabled: true
+    file: "logs/atlos.log"
+    max_size: "10MB"
+    backup_count: 5
+  
+  # Rotation des logs
+  rotation: "daily"
+  
+  # Logs vers console
+  console_handler:
+    enabled: true
+    colored: true
+
+# ===================== DÉTECTION IDS/IPS =====================
+ids_detection:
+  # Activation de la détection
+  enabled: true
+  
+  # Signatures à détecter
+  signatures:
+    - "suricata"
+    - "snort"
+    - "zeek"
+  
+  # Temps d'attente entre paquets suspects
+  suspicious_delay: 5.0
+  
+  # Adaptation automatique du timing
+  auto_adapt: true
+  
+  # Techniques d'évasion
+  evasion_techniques:
+    - "fragmentation"
+    - "timing_variation"
+    - "source_port_randomization"
+
+# ===================== PERFORMANCE =====================
+performance:
+  # Cache DNS
+  dns_cache: true
+  dns_cache_ttl: 300
+  
+  # Cache des résultats de scan
+  scan_cache: true
+  scan_cache_ttl: 3600
+  
+  # Optimisation mémoire
+  memory_limit: "1GB"
+  
+  # Optimisation CPU
+  cpu_affinity: null
+  
+  # Mode asynchrone
+  async_mode: true
+
+# ===================== DÉVELOPPEMENT =====================
+development:
+  # Mode debug
+  debug: false
+  
+  # Mode verbeux
+  verbose: false
+  
+  # Tests unitaires
+  run_tests: false
+  
+  # Coverage
+  coverage: false
+  
+  # Profiling
+  profiling: false
